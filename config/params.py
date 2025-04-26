@@ -1,8 +1,14 @@
-# Global variables for the application
-AZURE_OPENAI_API_KEY = "your_api_key_here"
-AZURE_OPENAI_ENDPOINT = "your_endpoint_here"
-CHUNK_SIZE = 500
-CHUNK_OVERLAP = 50
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-FAISS_INDEX_PATH = "faiss_index.index"
-TOP_K = 5
+from dotenv import load_dotenv
+from llama_index import Settings
+from openai import OpenAI
+
+# Load environment variables
+load_dotenv()
+
+# Configure Azure OpenAI
+Settings.llm = OpenAI(
+    api_key=AZURE_OPENAI_API_KEY,
+    api_base=AZURE_OPENAI_ENDPOINT,
+    api_type="azure",
+    api_version="2023-05-15"
+)
